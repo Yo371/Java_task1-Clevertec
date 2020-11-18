@@ -1,0 +1,62 @@
+
+Запуск :
+1.) mvn compile
+2.) mvn exec:java -Dexec.mainClass=CheckRunner -Dexec.args="1-2 2-3 3-5 4-1 5-2 goldcard-123456864111" 
+ 	или 
+    mvn exec:java -Dexec.mainClass=CheckRunner -Dexec.args="src\main\resources\data.txt"
+
+Запуск тестов : mvn test
+
+* Если в качестве аргументов передан путь к data файлу, данные будут взяты из него
+  и чек будет записан в созданный файл src/main/resources/receipt.txt
+* Если в кач-ве аргументов сами данные (формата 1-3 и тд, где 1-id 3-кол-во), чек будет
+  выведен в консоль
+
+Передача товаров и их кол-во в аргументы
+* Первая цифра id, в случае если переданный id превышает максимально допустимый (5)
+  будет выброшено исключение NoSuchProductException
+* Если передан аргумент с id который уже был передан в этом же списке аргументов, то
+  их кол-во суммируется. Например "1-2 1-3" -> "1-5"
+
+Передача карты в аргументы :
+* Карта может быть двух типов goldcard (с 6% скидкой) или simplecard (с 3% скидкой),
+  в противном случае будет выброшено исключение InvalidCardTypeException
+* Номер карты должен состоять из 12 цифр, в противном случае будет выброшено
+  исключение InvalidCardNumberException
+* При передаче карты в аргументы, тип карты и её номер разделяет дефис
+
+
+
+** Пример результата с аргументами "1-2 2-3 3-5 4-1 5-2 goldcard-123456864111"
+
+
+========================================
+
+              Green Store
+           +375(29)937-99-92
+
+TIME  13:00:27          DATE  2020-11-17
+========================================
+ID    DESCRIPTION                  PRICE
+2     Bread                         1.5
+2     Bread                         1.5
+2     Bread                         1.5
+3     KitKat                        0.8
+3     KitKat                        0.8
+3     KitKat                        0.8
+3     KitKat                        0.8
+3     KitKat                        0.8
+*     The item KitKat is promotional
+*     Discount 10% has been provided
+*     Total cost in position KitKat 3.6
+1     Milk 3.2%                     1.8
+1     Milk 3.2%                     1.8
+4     Milk 2.5%                     1.3
+5     Snickers                      2.0
+5     Snickers                      2.0
+========================================
+*         GOLDCARD(123456864111)
+*         has been provided
+*         Included 6% discount
+========================================
+***   Total cost:                  15,98
