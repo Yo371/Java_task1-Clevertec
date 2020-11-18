@@ -59,6 +59,7 @@ public class GroceryStore {
 
     public GroceryStore addOrder(String[] args) throws NoSuchProductException,
             InvalidCardNumberException, InvalidCardTypeException {
+
         orderMap = new HashMap<>();
         String[] splittedArgs;
         Product foundProduct;

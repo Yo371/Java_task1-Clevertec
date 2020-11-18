@@ -30,8 +30,6 @@ public class CheckRunner {
 
         File file = new File(args[0].trim());
 
-        //если в аргументы передан путь к data файлу, берем данные и печатаем чек в файл
-        //иначе берем данные из аргументов и печатаем чек в консоль
         try {
 
             if (file.isFile())
@@ -48,10 +46,5 @@ public class CheckRunner {
             e.printStackTrace();
         }
 
-        /*groceryStore.addOrder(new String[]{"1-2", "2-3", "3-4", "4-1", "goldcard-123456864111"})
-                .processOrder().printCheckToConsole();*/
-
-        /*groceryStore.addOrderFromFile(new File("src/main/resources/data.txt")).processOrder()
-                .printCheckToFile(new File("src/main/resources/receipt.txt"));*/
     }
 }
